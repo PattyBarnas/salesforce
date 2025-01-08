@@ -47,6 +47,19 @@ public with sharing class Calculator {
         }
 
         public static Integer Mod(Integer a, Integer b){
-            
+            Integer result = 0;
+
+            while(a > b){
+                a = a - b;
+
+                if(a < b){
+                    result = a;
+                } else {
+                    return 0;
+                }
+            }
+            return result;
+
+
         }
 }
