@@ -8,3 +8,7 @@
 string tempvar = 'Enter_your_name_here';
 System.debug('Hello World!');
 System.debug('My name is ' + tempvar);
+
+System.debug(Calculator.add(0,5));
+System.debug(Calculator.divide(10,2));
+System.debug(Calculator.multiply(2,3));
