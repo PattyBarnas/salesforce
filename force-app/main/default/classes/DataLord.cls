@@ -23,5 +23,12 @@ public with sharing class DataLord {
         ];
     }
 
+    public static List<Account> BigFive(){
+        return [SELECT AnnualRevenue FROM ACCOUNT ORDER BY AnnualRevenue DESC LIMIT 5];
+    }
+    // public static Opportunity LastBigOpportunity(){
+
+    // }
+
     
 }
