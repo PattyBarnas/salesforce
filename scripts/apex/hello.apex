@@ -13,3 +13,8 @@ System.debug(Calculator.add(0,5));
 System.debug(Calculator.divide(10,2));
 System.debug(Calculator.multiply(2,3));
 System.debug(Calculator.mod(10,4));
+
+// SOQL
+System.debug(DataLord.NumAccounts());
+System.debug(DataLord.NumHot());
+System.debug(DataLord.NumComplex());

@@ -59,7 +59,9 @@ public with sharing class Calculator {
                 }
             }
             return result;
+        }
 
+        public static Integer Calculate(String a){
 
         }
 }
