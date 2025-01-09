@@ -21,3 +21,5 @@ System.debug(DataLord.BigFive());
 System.debug(DataLord.LastBigOpportunity());
 System.debug(DataLord.MajorPlayers());
 System.debug(DataLord.MostPopularAccount());
+System.debug(DataLord.getContactandLeadsNamedTom());
+System.debug(DataLord.getAccounts());

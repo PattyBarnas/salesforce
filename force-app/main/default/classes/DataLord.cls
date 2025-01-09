@@ -38,5 +38,10 @@ public with sharing class DataLord {
         return [SELECT Account.Name, COUNT(Id) FROM CONTACT GROUP BY Account.Name ORDER BY COUNT(ID) DESC LIMIT 1];
     }
 
-    
+    public static List<List<sObject>> getContactAndLeadsNamedTom(){
+        return [FIND 'Tom' RETURNING Lead(Name), Contact(Name)];
+    }
+    public static List<List<sObject>> getAccounts(){
+        return [FIND 'a* AND o*' IN ALL FIELDS RETURNING Account(Name)];
+    }
 }
