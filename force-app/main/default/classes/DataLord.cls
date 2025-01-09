@@ -44,4 +44,8 @@ public with sharing class DataLord {
     public static List<List<sObject>> getAccounts(){
         return [FIND 'a* AND o*' IN ALL FIELDS RETURNING Account(Name)];
     }
+
+    public static getNameOfNum1000(){
+        return [FIND '*1000' IN PHONE FIELDS RETURNING Account(Name), Contact(Name), Lead(Name)];
+    }
 }
