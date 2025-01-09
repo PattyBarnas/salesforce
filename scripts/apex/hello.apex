@@ -18,3 +18,6 @@ System.debug(Calculator.mod(10,4));
 System.debug(DataLord.NumAccounts());
 System.debug(DataLord.NumHot());
 System.debug(DataLord.BigFive());
+System.debug(DataLord.LastBigOpportunity());
+System.debug(DataLord.MajorPlayers());
+System.debug(DataLord.MostPopularAccount());
