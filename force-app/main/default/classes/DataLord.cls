@@ -54,14 +54,64 @@ public with sharing class DataLord {
     // DML
 
     public static void SpawnContacts(){
-        List<Contact> contactList =  new List<Contact>();
-        for(Integer i = 0; i < 200; i++){
-            Contact newContact = new Contact();
-            newContact.firstName = 'first ' + i;
-            newContact.lastName = 'last ' + i;
-            contactList.add(newContact); 
+
+        try {
+            List<Contact> contactList =  new List<Contact>();
+            for(Integer i = 0; i < 200; i++){
+                Contact newContact = new Contact();
+                newContact.firstName = 'first ' + i;
+                newContact.lastName = 'last ' + i;
+                contactList.add(newContact); 
+            }
+            Database.insert(contactList);
+        } catch (DMLException e) {
+            
         }
-        Database.insert(contactList);
+  
+    }
+
+    public static void CreateHomes(){
+        try {
+            List<Account> accList =  new List<Account>();
+            for(Integer i = 0; i < 3; i++){
+                Account newAcc = new Account();
+                newAcc.Name = 'unique ' + i;
+                accList.add(newAcc); 
+            }
+            // Account existing = [SELECT ]
+            Database.insert(accList);
+
+        } catch (DMLException e) {
+            
+        }
+    }
+
+    public static void Relocate(){
+        Contact[] latestContacts = [SELECT Id FROM Contact ORDER BY Id DESC LIMIT 50];
+        try {
+            Database.delete(latestContacts);
+        } catch (DMLException e) {
+            
+        }
+
     }
     
+    public static void AssignHomes(){
+        Contact[] conList = [SELECT Id FROM Contact ORDER BY Id DESC Limit 150];
+        Account[] accList = [SELECT Id FROM Account ORDER BY Id DESC Limit 3];
+        Integer randomNum = Integer.valueOf(Math.random() * 2);
+
+
+        try {
+            for(Integer i = 0; i < conList.size(); i++){
+                conList[i].AccountId = accList[randomNum].Id;
+            }
+            Database.update(conList);
+
+        } catch (DMLException e) {
+            
+        }
+    }
+
+
 }

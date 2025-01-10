@@ -26,4 +26,4 @@ System.debug(DataLord.GetContactandLeadsNamedTom());
 System.debug(DataLord.GetAccounts());
 
 // DML
-System.debug(DataLord.spawnContacts());
+// System.debug(DataLord.spawnContacts());
