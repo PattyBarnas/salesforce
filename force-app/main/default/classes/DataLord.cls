@@ -57,6 +57,7 @@ public with sharing class DataLord {
 
         try {
             List<Contact> contactList =  new List<Contact>();
+
             for(Integer i = 0; i < 200; i++){
                 Contact newContact = new Contact();
                 newContact.firstName = 'first ' + i;
@@ -112,6 +113,7 @@ public with sharing class DataLord {
             
         }
     }
+    public static void Play(){}
 
 
 }
