@@ -4,7 +4,7 @@
 public with sharing class DataLord {
     public DataLord() {
     }
-
+// SOQL
     public static Integer NumAccounts(){
         Integer numOfAccounts = [SELECT COUNT() FROM Account];
         return numOfAccounts;
@@ -19,7 +19,7 @@ public with sharing class DataLord {
     public static Integer NumComplex(){
         return [SELECT COUNT()
         FROM Account
-        WHERE Name LIKE '%&'
+        WHERE Name LIKE '%&%'
         ];
     }
 
@@ -38,6 +38,8 @@ public with sharing class DataLord {
         return [SELECT Account.Name, COUNT(Id) FROM CONTACT GROUP BY Account.Name ORDER BY COUNT(ID) DESC LIMIT 1];
     }
 
+    // SOSL
+
     public static List<List<sObject>> getContactAndLeadsNamedTom(){
         return [FIND 'Tom' RETURNING Lead(Name), Contact(Name)];
     }
@@ -45,7 +47,21 @@ public with sharing class DataLord {
         return [FIND 'a* AND o*' IN ALL FIELDS RETURNING Account(Name)];
     }
 
-    public static getNameOfNum1000(){
+    public static List<List<sObject>> getNameOfNum1000(){
         return [FIND '*1000' IN PHONE FIELDS RETURNING Account(Name), Contact(Name), Lead(Name)];
     }
+
+    // DML
+
+    public static void SpawnContacts(){
+        List<Contact> contactList =  new List<Contact>();
+        for(Integer i = 0; i < 200; i++){
+            Contact newContact = new Contact();
+            newContact.firstName = 'first ' + i;
+            newContact.lastName = 'last ' + i;
+            contactList.add(newContact); 
+        }
+        Database.insert(contactList);
+    }
+    
 }

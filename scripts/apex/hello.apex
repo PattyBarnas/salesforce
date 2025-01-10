@@ -17,9 +17,13 @@ System.debug(Calculator.mod(10,4));
 // SOQL
 System.debug(DataLord.NumAccounts());
 System.debug(DataLord.NumHot());
+System.debug(DataLord.NumComplex());
 System.debug(DataLord.BigFive());
 System.debug(DataLord.LastBigOpportunity());
 System.debug(DataLord.MajorPlayers());
 System.debug(DataLord.MostPopularAccount());
-System.debug(DataLord.getContactandLeadsNamedTom());
-System.debug(DataLord.getAccounts());
+System.debug(DataLord.GetContactandLeadsNamedTom());
+System.debug(DataLord.GetAccounts());
+
+// DML
+System.debug(DataLord.spawnContacts());
