@@ -1,6 +1,6 @@
-public with sharing class Vehicle {
+public virtual class Vehicle {
 
-    public enum Medium {LAND, AIR, WATER}
+   public enum Medium {LAND, AIR, WATER}
 
     private Integer speed;
     // {
@@ -12,11 +12,14 @@ public with sharing class Vehicle {
     protected List<Medium> media;
 
 
+    
+
     public Vehicle() {
         this.Speed = 45;
         this.Occupants = 6;
         this.Name = 'Cyber Truck';
         this.Capacity = 5; 
+        this.media = new List<Medium>();
         
         // , Integer speed ,Integer occupants, Integer capacity
         // this.occupants = occupants;
@@ -27,6 +30,10 @@ public with sharing class Vehicle {
         // setSpeed(speed);
         // setName(name);
     }
+
+    public void addMedia() {
+       
+    }
     
 
     public Integer getSpeed(){
@@ -35,18 +42,19 @@ public with sharing class Vehicle {
     public String getName(){
         return this.name;
     }
-    public Integer Accelerate(Integer setSpeed){
+    public Integer accelerate(Integer setSpeed){
         if(speed < 0) throw new IllegalArgumentException('Cant go negative speed.');
         return speed = setSpeed;
     }
-    public String setName(String setName){
-        return this.name = name;
-    }
 
-    public abstract String turn();
+
    
     public Integer getCapacity(){
        return this.capacity;
+    }
+
+    public override String toString(){
+       return 'You are currently going ' +  speed + '\n' + 'Current media: ' + media  + '\n' + 'Name: ' + name + '\n' + 'Occupants: ' +  occupants;
     }
 
 }

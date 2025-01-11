@@ -33,6 +33,13 @@ DataLord.Relocate();
 
 // OOP
 
+//   public enum Medium {LAND, AIR, WATER}
 Vehicle veh = new Vehicle();
-System.debug(veh.Accelerate(50));
+// System.debug(veh.addMedia(Medium));
+System.debug(veh.getSpeed());
 
+// Car Class
+
+Car car = new Car();
+car.getSteeringRotation();
+System.debug(car.getSpeed());
