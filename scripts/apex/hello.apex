@@ -29,3 +29,10 @@ System.debug(DataLord.GetAccounts());
 DataLord.SpawnContacts();
 // DataLord.spawnContacts();
 DataLord.CreateHomes();
+DataLord.Relocate();
+
+// OOP
+
+Vehicle veh = new Vehicle();
+System.debug(veh.Accelerate(50));
+
