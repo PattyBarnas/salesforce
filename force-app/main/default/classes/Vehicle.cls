@@ -1,4 +1,4 @@
-public virtual class Vehicle {
+public virtual class Vehicle extends Turn {
 
     public enum Medium {LAND, AIR, WATER}
 
@@ -6,12 +6,14 @@ public virtual class Vehicle {
         get {
             return 45;
         }
+        set{}
     }
 
     public String name {
         get{
             return 'Cyber Truck';
         }
+        set{}
     }
 
     public Integer occupants {
@@ -44,13 +46,13 @@ public virtual class Vehicle {
 
     
 
-    public Vehicle() {
+    public Vehicle(Integer speed, Integer occupants, String name, Integer capacity) {
     //if we want to initialize default values; 
 
-        // this.speed = 45;
-        // this.occupants = 6;
-        // this.name = 'Cyber Truck';
-        // this.capacity = 5; 
+        this.speed = speed;
+        this.occupants = occupants;
+        this.name = name ;
+        this.capacity = capacity; 
         // this.media = mediaList;
         
         // , Integer speed ,Integer occupants, Integer capacity
@@ -76,10 +78,10 @@ public virtual class Vehicle {
     //     return this.name;
     // }
 
-    // public Integer accelerate(Integer setSpeed){
-    //     if(speed < 0) throw new IllegalArgumentException('Cant go negative speed.');
-    //     return speed = setSpeed;
-    // }
+    public Integer accelerate(Integer setSpeed){
+        if(speed < 0) throw new IllegalArgumentException('Cant go negative speed.');
+        return speed = setSpeed;
+    }
 
 
    
@@ -98,8 +100,14 @@ public virtual class Vehicle {
     //     return this.name = newVal;
     // }
 
+    public override String turn(){
+        return 'You have turned left! Watch out!';
+    }
+
     public override String toString(){
        return 'You are currently going ' +  speed + '\n' + 'Current media: ' + media  + '\n' + 'Name: ' + name + '\n' + 'Occupants: ' +  occupants;
     }
+
+  
 
 }
