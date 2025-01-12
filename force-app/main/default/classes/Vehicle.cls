@@ -1,25 +1,57 @@
 public virtual class Vehicle {
 
-   public enum Medium {LAND, AIR, WATER}
+    public enum Medium {LAND, AIR, WATER}
 
-    private Integer speed;
-    // {
-    //  get {return speed; }
-    // }
-    private String name;
-    public Integer occupants;
-    public final Integer capacity;
-    protected List<Medium> media;
+    public Integer speed {
+        get {
+            return 45;
+        }
+    }
+
+    public String name {
+        get{
+            return 'Cyber Truck';
+        }
+    }
+
+    public Integer occupants {
+        get{
+            return 4;
+        }
+         set { 
+            if( value < 0) throw new IllegalArgumentException('Cant be negative! ');
+        }
+    }
+
+    public final Integer capacity {
+        get{
+            return 1;
+        }
+        set {
+            if( value < 1) throw new IllegalArgumentException('Cant be less then 1. ');
+        }
+    }
+
+    protected List<Medium> mediaList = new List<Medium>();
+
+    public List<Medium> media { 
+        get {
+            return mediaList;
+        } 
+    }
+    
 
 
     
 
     public Vehicle() {
-        this.Speed = 45;
-        this.Occupants = 6;
-        this.Name = 'Cyber Truck';
-        this.Capacity = 5; 
-        this.media = new List<Medium>();
+    //if we want to initialize default values; 
+
+        // this.speed = 45;
+        // this.occupants = 6;
+        // this.name = 'Cyber Truck';
+        // this.capacity = 5; 
+        // this.media = mediaList;
         
         // , Integer speed ,Integer occupants, Integer capacity
         // this.occupants = occupants;
@@ -31,27 +63,40 @@ public virtual class Vehicle {
         // setName(name);
     }
 
-    public void addMedia() {
+    // public void addMedia() {
        
-    }
+    // }
     
 
-    public Integer getSpeed(){
-        return this.speed;
-    }
-    public String getName(){
-        return this.name;
-    }
-    public Integer accelerate(Integer setSpeed){
-        if(speed < 0) throw new IllegalArgumentException('Cant go negative speed.');
-        return speed = setSpeed;
-    }
+    // public Integer getSpeed(){
+    //     return this.speed;
+    // }
+
+    // public String getName(){
+    //     return this.name;
+    // }
+
+    // public Integer accelerate(Integer setSpeed){
+    //     if(speed < 0) throw new IllegalArgumentException('Cant go negative speed.');
+    //     return speed = setSpeed;
+    // }
 
 
    
     public Integer getCapacity(){
        return this.capacity;
     }
+
+    // public Integer setSpeed(Integer newVal){
+    //     if (newVal < 0) throw new IllegalArgumentException('You cant go negative speed!');
+    //     return this.speed = newVal;
+    // }
+ 
+
+    // protected String setName(String newVal){
+    //     if (newVal == null) throw new IllegalArgumentException('you need to enter a value!');
+    //     return this.name = newVal;
+    // }
 
     public override String toString(){
        return 'You are currently going ' +  speed + '\n' + 'Current media: ' + media  + '\n' + 'Name: ' + name + '\n' + 'Occupants: ' +  occupants;

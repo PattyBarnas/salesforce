@@ -1,25 +1,35 @@
-public class Car extends Vehicle {
+public class Car extends Vehicle  {
 
-    private Integer SteeringRotation;
-    private Integer TireRotation;
-    private List<Gear> gear;
+    private Integer steeringRotation;
+    private Integer tireRotation;
+    private String gear;
 
 
     public Car() {
-
-        this.SteeringRotation = 750;
-        this.TireRotation = 45;
-
+        this.steeringRotation = 750;
+        this.tireRotation = 45;
+        this.gear = 'Jacket, Shoes, Boots';
     }
 
 
-    public void getSteeringRotation(){
-        if(SteeringRotation < -1440 || SteeringRotation > 1440) throw new IllegalArgumentException('The car cannot be less then -1440 or greater then 1440');
-           
-        System.debug(SteeringRotation);
+    public void getGear(){
+        System.debug(gear);
     }
+
     public void getSteeringRotation(){
-        if(TireRotation < -90 || TireRotation > 90) throw new IllegalArgumentException('The car cannot be less then -90 or greater then 90');
-        System.debug(TireRotation);
+        System.debug(steeringRotation);
+    }
+    public void getTireRotation(){
+        System.debug(tireRotation);
+    }
+    public void setTurn(Integer newVal){
+    if(steeringRotation < -1440 || steeringRotation > 1440) throw new IllegalArgumentException('The car cannot be less then -1440 or greater then 1440');
+        steeringRotation = newVal;
+        System.debug(steeringRotation);
+    }
+    public void setTireRotation(Integer newVal){
+        if(tireRotation < -90 || tireRotation > 90) throw new IllegalArgumentException('The car cannot be less then -90 or greater then 90');
+            tireRotation = newVal;
+            System.debug(tireRotation);
     }
 }

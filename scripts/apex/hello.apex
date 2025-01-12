@@ -35,11 +35,25 @@ DataLord.Relocate();
 
 //   public enum Medium {LAND, AIR, WATER}
 Vehicle veh = new Vehicle();
+veh.media.add(Vehicle.Medium.LAND);
+veh.media.add(Vehicle.Medium.AIR);
+veh.media.add(Vehicle.Medium.WATER);
+System.debug(veh.media);
+System.debug(veh.speed);
+System.debug(veh.name);
+System.debug(veh.occupants = 5);
+System.debug(veh.occupants);
+
+// System.debug(veh.setName('newVal'));
 // System.debug(veh.addMedia(Medium));
 System.debug(veh.getSpeed());
 
 // Car Class
 
 Car car = new Car();
+System.debug(car);
+System.debug(car);
 car.getSteeringRotation();
+car.getTireRotation();
+car.getGear();
 System.debug(car.getSpeed());
