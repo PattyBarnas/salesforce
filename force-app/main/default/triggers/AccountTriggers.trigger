@@ -6,14 +6,18 @@ trigger AccountTriggers on Account (after insert, before delete) {
     //     AccountHelper.preventDelete(Trigger.old);
 
     // }
-    switch on Trigger.operationType{
+    switch on Trigger.operationType {
         // when AFTER_INSERT{
         //     // AccountHelper.createNewRelatedContact(Trigger.new);
         // }
         
-        when BEFORE_DELETE{
+        when BEFORE_DELETE {
             AccountHelper.preventDelete(Trigger.old);
 
+        }
+        when AFTER_INSERT { 
+            // AccountHelper
+            AccountHelper.insertNewRelatedContact(Trigger.new);
         }
     }
 

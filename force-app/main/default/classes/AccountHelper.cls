@@ -42,9 +42,19 @@ public with sharing class AccountHelper {
 
     }
 
-    public static void createNewRelatedContact(){
+    @AuraEnabled
+    public static void insertNewRelatedContact(List<Account> newAcc){
         try {
-        
+            
+            List<Contact> contList = new List<Contact>();
+
+            for(Integer i = 0; i < newAcc.size(); i++){
+                Contact cont = new Contact(LastName = 'Testing' + i);
+                cont.AccountId = newAcc[i].Id;
+                contList.add(cont);
+            }
+
+           insert contList;
         } catch (Exception e) {
             
         }
