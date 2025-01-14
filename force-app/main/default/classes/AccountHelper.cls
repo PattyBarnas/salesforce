@@ -7,17 +7,30 @@ public with sharing class AccountHelper {
     @AuraEnabled
     public static void preventDelete(List<Account> accList){
 
-
         try {
+
+            // Not letting me delete even if empty
+            Set<Id> accIds = new Set<Id>();
 
             for(Account acc : accList){
                 if(acc.Id != null){
-                acc.addError('Cannot delete an account that contains contacts.');
+                accIds.add(acc.Id);
+                } 
+            }
 
+
+            // Get related contacts list
+            List<Contact> conList = [SELECT AccountId From Contact WHERE AccountId In :accIds];
+
+            for (Account acc : accList){
+                for(Contact c: conList){
+                    if(acc.Id == c.AccountId){
+
+                        acc.addError('Cannot delete an account that contains contacts.');
+                    }
                 }
             }
            
-   
         } catch (Exception e) {
             
         }
