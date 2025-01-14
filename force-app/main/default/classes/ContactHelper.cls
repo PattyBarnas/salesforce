@@ -15,28 +15,31 @@ public class ContactHelper {
 
     // Class Challenge
 
-    @AuraEnabled
-    public static void preventContactFromSave(List<Account> accList){
-        try {
+    public static void matchingEmailInsert(List<Contact> contacts){
+        
+        Set<Id> conIds = new Set<Id>();
 
-            List<Contact> cont = new List<Contact>();
-            // Prevent save if contact email doesnt match the rest of the contacts email
-            // on that Account.
-            // find accounts related to contacts
+        for(Contact c : contacts){
+            conIds.add(c.AccountId);
+        }
 
+        List<Contact> otherContacts = [SELECT Email, AccountId FROM Contact WHERE ID IN :conIds];
 
-            for(Contact con : conList){
-
-                if(con.contains(con)){
-                    con.addError('Email must match rest of the contacts domain!');
+        for(Integer i = 0; i < conIds.size(); i++){
+            for(Integer j = 0; j < contacts.size(); j++){
+                if(otherContacts.get(i).AccountId == contacts.get(j).AccountId){
+                    //get domain of contact
+                    List<String> emailsplit = contacts.get(j).Email.split('@');
+                    String domain = emailsplit[1];
+                    if(!otherContacts.get(j).Email.contains(domain)){
+                        contacts.get(j).addError('You cannot add contact, wrong domain');
+                    }
+ 
                 }
-
             }
-            
-        } catch (Exception e) {
-            throw new AuraHandledException(e.getMessage());
         }
     }
+ 
 
 
 }

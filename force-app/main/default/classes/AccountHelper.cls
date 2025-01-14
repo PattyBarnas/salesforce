@@ -31,15 +31,10 @@ public with sharing class AccountHelper {
 
                 }
             }
-           
-
-        
+   
         } catch (Exception e) {
             
         }
-
-    
-
     }
 
     @AuraEnabled
@@ -49,9 +44,11 @@ public with sharing class AccountHelper {
             List<Contact> contList = new List<Contact>();
 
             for(Integer i = 0; i < newAcc.size(); i++){
+
                 Contact cont = new Contact(LastName = 'Testing' + i);
                 cont.AccountId = newAcc[i].Id;
                 contList.add(cont);
+
             }
 
            insert contList;

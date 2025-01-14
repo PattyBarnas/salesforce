@@ -3,13 +3,32 @@ public with sharing class ClassDelHelper {
 
     }
 
-    public void createDeliveryRecord(String Id){
+    public void createDeliveryRecord(){
 
-        List<Class_Delivery__c> classList = [SELECT Name FROM Class_Delivery__c WHERE Id = :Id];
+        // List<Class_Delivery__c> classList = [SELECT ID FROM Class_Delivery__c WHERE Id = :Id];
 
-        for(Class_Delivery__c c : newClass){
-            Class_Delivery__c = new Class_Delivery__c();
+        // if(classList.isEmpty()){
+        
+        // }
+        Class_Delivery__c newClass = new Class_Delivery__c(Course__c = 'Create Delivery', Name = 'create delivery');
+    
+        Database.insert(newClass);
+    }
 
+    public static void deleteDeliveryRecords(Id id){
+        Class_Delivery__c classId = [SELECT id FROM Class_Delivery__c WHERE Id = :id];
+        if(classId == null){
+          Database.delete(classId);
         }
+    }
+
+    public static void changeClassDelivery(Id Id){
+
+        Class_Delivery__c classDel = [SELECT Id, Name FROM Class_Delivery__c WHERE Id = :id];
+
+        classDel.Name = '.Net';
+
+        Database.update(classDel);
+
     }
 }
