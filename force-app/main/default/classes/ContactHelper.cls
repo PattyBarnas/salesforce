@@ -13,4 +13,30 @@ public class ContactHelper {
     }
 
 
+    // Class Challenge
+
+    @AuraEnabled
+    public static void preventContactFromSave(List<Account> accList){
+        try {
+
+            List<Contact> cont = new List<Contact>();
+            // Prevent save if contact email doesnt match the rest of the contacts email
+            // on that Account.
+            // find accounts related to contacts
+
+
+            for(Contact con : conList){
+
+                if(con.contains(con)){
+                    con.addError('Email must match rest of the contacts domain!');
+                }
+
+            }
+            
+        } catch (Exception e) {
+            throw new AuraHandledException(e.getMessage());
+        }
+    }
+
+
 }
