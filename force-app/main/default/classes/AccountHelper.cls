@@ -5,32 +5,18 @@ public with sharing class AccountHelper {
 
    
     @AuraEnabled
-    public static void preventDelete(List<Account> oldAccList){
+    public static void preventDelete(List<Account> accList){
 
-        // Create a trigger to prevent the deletion of Accounts with Contacts.
-        // if contact exists
-        // throw error
+
         try {
 
-            List<Contact> relatedContactList = [SELECT Id
-            FROM Contact  
-            WHERE AccountId In : Trigger.oldMap.KeySet()];
-
-            set<id> accIds = new set<id>();
-
-            if(!relatedContactList.isEmpty()){
-
-                for(Contact c: relatedContactList){
-                    accIds.add(c.AccountId);
-                }
-
-                for(Account acc: oldAccList){
-                    if(accIds.contains(acc.id)){
-                        acc.addError('Cannot delete an account that contains contacts.');
-                    }
+            for(Account acc : accList){
+                if(acc.Id != null){
+                acc.addError('Cannot delete an account that contains contacts.');
 
                 }
             }
+           
    
         } catch (Exception e) {
             
@@ -56,6 +42,8 @@ public with sharing class AccountHelper {
             
         }
     }
+
+
 
     // public static Account createAccount(){
 

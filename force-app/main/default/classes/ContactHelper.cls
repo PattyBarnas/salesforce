@@ -5,11 +5,13 @@ public class ContactHelper {
 
     @AuraEnabled
     public static void insertDefaultEmail(List<Contact> newContactList){
+        // List<Contact> email = new List<Contact>();
         for(Contact c : newContactList){
             if(String.isEmpty(c.Email)){
-                c.Email = c.LastName + '@yahoo.com';
+                c.Email = c.LastName + '@yahoo.com'; 
             }
         }
+       
     }
 
 
