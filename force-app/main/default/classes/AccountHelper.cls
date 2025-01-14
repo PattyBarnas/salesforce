@@ -25,7 +25,6 @@ public with sharing class AccountHelper {
             for (Account acc : accList){
                 for(Contact c: conList){
                     if(acc.Id == c.AccountId){
-
                         acc.addError('Cannot delete an account that contains contacts.');
                     }
                 }
@@ -43,7 +42,6 @@ public with sharing class AccountHelper {
             List<Contact> contList = new List<Contact>();
 
             for(Integer i = 0; i < newAcc.size(); i++){
-
                 Contact cont = new Contact(LastName = 'Testing' + i);
                 cont.AccountId = newAcc[i].Id;
                 contList.add(cont);
