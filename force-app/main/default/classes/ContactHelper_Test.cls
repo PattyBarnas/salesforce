@@ -1,33 +1,28 @@
 @isTest
-public with sharing class ContactHelper_Test {
-    public ContactHelper_Test() {
+public class ContactHelper_Test {
 
-    }
-
-    static void TestPreventSaves(){
-        Account testAcc = new Account(Name='test acc');
-
+    @isTest
+    public static void TestPreventSaves() {
+        // Create a test account
+        Account testAcc = new Account(Name = 'test acc');
         insert testAcc;
 
-        Contact testC = new Contact(LastName='testC', AccountId = testAcc.Id, Email='test@temp.com');
-        Contact testC2 = new Contact(LastName='testC2', AccountId = testAcc.Id, Email='test@sdfs.com');
-  
-        List<Contact> toAdd = new List<Contact>();
-        toAdd.add(testC);
-        toAdd.add(testC2);
+        // Create contacts with different domains
+        Contact test1 = new Contact(LastName = 'jake', AccountId = testAcc.Id, Email = 'test@zzzz.com');
+        Contact test2 = new Contact(LastName = 'mike', AccountId = testAcc.Id, Email = 'test@xxxx.com');
 
-        List<Database.SaveResult> sr = Database.insert(toAdd, true);
+        List<Contact> conList = new List<Contact>();
+        conList.add(test1);
+        conList.add(test2);
 
-        Integer success = 0;
-        Integer fail = 0;
-
-        for(Database.SaveResult s : sr){
-            if(s.isSuccess()){
-                success =+ 1;
-            } else {
-                fail += 1;
-            }
+        try {
+            ContactHelper.matchingEmailInsert(conList);
+        } catch (DMLException e) {
+            // Handle exception
         }
 
+        List<Contact> contacts = [SELECT Id, LastName, Email, AccountId FROM Contact WHERE AccountId = :testAcc.Id];
+
+        System.assertEquals(1, contacts.size());
     }
 }

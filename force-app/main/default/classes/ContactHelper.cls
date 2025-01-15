@@ -17,31 +17,62 @@ public class ContactHelper {
 
     // Class Challenge
 
-    public static void matchingEmailInsert(List<Contact> contacts){
-        
+    public static void matchingEmailInsert(List<Contact> contacts) {
         Set<Id> conIds = new Set<Id>();
-
-        for(Contact c : contacts){
+    
+        for(Contact c : contacts) {
             conIds.add(c.AccountId);
         }
-
-        List<Contact> otherContacts = [SELECT Email, AccountId FROM Contact WHERE ID IN :conIds];
-
-        for(Integer i = 0; i < conIds.size(); i++){
-            for(Integer j = 0; j < contacts.size(); j++){
-                if(otherContacts.get(i).AccountId == contacts.get(j).AccountId){
-                    //get domain of contact
-                    List<String> emailsplit = contacts.get(j).Email.split('@');
-                    String domain = emailsplit[1];
-                    if(!otherContacts.get(j).Email.contains(domain)){
+    
+        if(conIds.size() > 0) {
+            List<Contact> otherContacts = [SELECT Email, AccountId FROM Contact WHERE AccountId IN :conIds];
+    
+            Map<Id, String> accountDomainMap = new Map<Id, String>();
+            
+            for(Contact oc : otherContacts) {
+                List<String> emailsplit = oc.Email.split('@');
+                accountDomainMap.put(oc.AccountId, emailsplit[1]);
+            }
+    
+            for(Integer j = 0; j < contacts.size(); j++) {
+                if (accountDomainMap.containsKey(contacts.get(j).AccountId)) {
+                    String domain = accountDomainMap.get(contacts.get(j).AccountId);
+                    if(!contacts.get(j).Email.contains(domain)) {
                         contacts.get(j).addError('You cannot add contact, wrong domain');
                     }
- 
                 }
             }
         }
     }
- 
+
+    public static void updatePhoneFieldOnAcc(List<Contact> contList) { 
+        Set<Id> accIds = new Set<Id>();
+    
+        
+        for(Contact c: contList){
+            accIds.add(c.AccountId);
+        }
+    
+        if (!accIds.isEmpty()) {
+         
+            Map<Id, Account> accountMap = new Map<Id, Account>([SELECT Id, Phone FROM Account WHERE Id IN :accIds]);
+    
+          
+            List<Contact> contactsToUpdate = new List<Contact>();
+    
+            for(Contact c : contList) {
+                if (accountMap.containsKey(c.AccountId)) {
+                    accountMap.get(c.AccountId).Phone = c.Phone;
+                    contactsToUpdate.add(c);
+                }
+            }
+    
+            if (!contactsToUpdate.isEmpty()) {
+                update contactsToUpdate;
+            }
+        }
+    }
+    
 
 
 }

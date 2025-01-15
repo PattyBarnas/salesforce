@@ -48,32 +48,10 @@ public with sharing class AccountHelper {
     }
 
 
-    // public static void updatePhoneFieldOnAcc(List<Contact> contList,){ 
+ 
+ 
 
 
-    //     Map<Id, String> accountPhoneUpdate = new Map<Id, String>();
 
-    //     for(Contact c: contList){
-    //         // Contact oldCon = Trigger.oldMap.get(c.Id);
-    //         if(c.Phone != oldCon.Phone){
-    //             accountPhoneUpdate.put(con.AccountId, con);
-    //         }
-    //     }
 
-    //     List<Account> accToUpdate = new List<Account>();
-
-    //     for(Id accountId: accountPhoneUpdate.keySet()){
-    //         accToUpdate.add(new Account(Id = accountId, Phone = accountPhoneUpdate.get(acc)))
-    //     }
-
-    // }
-    // public static Account createAccount(){
-
-    // }
-    // public static List<Account> createAccounts(Integer accsToCreate){
-    //     for(Integer i; i < accsToCreate; i++){
-    //         Account a = new Account(Name = 'Test' + i);
-
-    //     }
-    // }
 }

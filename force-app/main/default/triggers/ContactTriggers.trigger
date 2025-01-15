@@ -9,19 +9,14 @@ trigger ContactTriggers on Contact (before insert, after update) {
 
             ContactHelper.insertDefaultEmail(Trigger.new);
             
+            }  
+            when AFTER_UPDATE {
+
+            ContactHelper.updatePhoneFieldOnAcc(Trigger.new);
+            
             }
         
-        // when AFTER_UPDATE{
-        //     // AccountHelper.preventDelete(Trigger.old);
-
-        // }
+ 
     }
-
-
-    // if(Trigger.isUpdate){
-
-    // }
-
-    // 
 
 }
