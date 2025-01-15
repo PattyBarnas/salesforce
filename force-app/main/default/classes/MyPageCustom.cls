@@ -3,7 +3,7 @@ public with sharing class MyPageCustom {
     
     public Account account {get;set;}
     public List<Contact> contact {get; set;}
-    // public Accounts accounts {get; set;}
+    public List<Account> accounts {get; set;}
     private Id id;
     public String userInput {get; set;}
 
@@ -42,6 +42,12 @@ public with sharing class MyPageCustom {
       } else {
         contact = new List<Contact>();
       }
+    }
+
+    public void getAccsByKeystrokes(){
+        if(!String.isEmpty(userInput)){
+            accounts = [SELECT NAME FROM ACCOUNT WHERE NAME LIKE :('%' + userInput + '%')];
+        }
     }
 
 }

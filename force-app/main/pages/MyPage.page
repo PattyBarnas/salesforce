@@ -20,6 +20,7 @@
             <apex:inputText value="{!userInput}" />
             <apex:commandLink action="{!getAccByUserInput}" value="Find Acc" />
         </apex:pageBlock>
+
         <apex:pageBlock>
             <apex:outputText value="Accounts found: {!account.name}" />
         </apex:pageBlock>
@@ -35,10 +36,30 @@
                 <apex:repeat value="{!contact}" var="cont">
                     {!cont.name}
                 </apex:repeat>
-            
         </apex:pageBlock>
     </apex:form> 
 
+    <!-- ///////////////////////////////////////////////////// -->
+    <apex:form id="form">
+        <apex:pageBlock>
+            <apex:pageBlockSection title="Search for an account list: ">
+                <apex:inputText value="{!userInput}" >
+                    <apex:actionSupport event="onkeyup" action="{!getAccsByKeystrokes}" rerender="results" />
+                </apex:inputText>
+                <apex:commandLink action="{!getAccByUserInput}" value="Find Acc" />
+            </apex:pageBlockSection>
+        </apex:pageBlock>
+    </apex:form> 
+
+
+
+    <apex:pageBlock id="results">
+        <h3>Matching Accounts:</h3>
+        <apex:repeat value="{!accounts}" var="acc">
+            <p>{!acc.Name}</p>
+        </apex:repeat>
+    </apex:pageBlock>
+    
 
     <!-- <apex:pageBlock title="All Accounts"> -->
         <!-- <apex:form id="allAccs"> -->

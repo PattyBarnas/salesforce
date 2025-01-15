@@ -16,6 +16,7 @@ public with sharing class AccountHelper {
                 accIds.add(acc.Id);
                 } 
             }
+            
             // Get related contacts list
             List<Contact> conList = [SELECT AccountId FROM Contact WHERE AccountId IN :accIds];
             for (Account acc : accList){
