@@ -129,6 +129,7 @@ public with sharing class DataLord {
             AssignHomes();
             DeleteSpawnContacts();
 
+
             Integer currentAccountCount = [SELECT COUNT() FROM Account];
             Integer currentContactCount = [SELECT COUNT() FROM Contact];
             System.debug('Current Account Count: ' + currentAccountCount);

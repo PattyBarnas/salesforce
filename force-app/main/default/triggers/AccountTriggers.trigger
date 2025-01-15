@@ -1,4 +1,4 @@
-trigger AccountTriggers on Account (after insert, before delete) {
+trigger AccountTriggers on Account (after insert, before delete, after update) {
     // Create a trigger to prevent the deletion of Accounts with Contacts.
 
 
@@ -11,10 +11,7 @@ trigger AccountTriggers on Account (after insert, before delete) {
             AccountHelper.preventDelete(Trigger.old);
 
         }
-        when AFTER_INSERT { 
-            // AccountHelper
-            AccountHelper.insertNewRelatedContact(Trigger.new);
-        }
+
         when BEFORE_UPDATE{
             // for(Account acc : Trigger.new){
             //     if(acc.email == null){
@@ -24,6 +21,14 @@ trigger AccountTriggers on Account (after insert, before delete) {
             //         // acc.email.addError('You cannot create an acc without email');
             //     }
             // }
+        }
+        when AFTER_INSERT { 
+            // AccountHelper
+            System.debug('After Insert Fired.');
+            AccountHelper.insertNewRelatedContact(Trigger.new);
+        }
+        when AFTER_UPDATE {
+            AccountHelper.updatePhoneFieldOnAcc(Trigger.old,Trigger.new );
         }
     }
 

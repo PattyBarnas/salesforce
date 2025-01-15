@@ -7,7 +7,6 @@ trigger ContactTriggers on Contact (before insert, after update) {
     switch on Trigger.operationType{
         when BEFORE_INSERT{
 
-            System.debug('trigger is fired');
             ContactHelper.insertDefaultEmail(Trigger.new);
             
             }

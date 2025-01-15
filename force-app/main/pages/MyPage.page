@@ -1,20 +1,27 @@
-<apex:page controller="MyPageCustom" tabStyle="Account" recordSetVar="accounts" extensions="MyPage" standardStylesheets="false" showHeader="false">
+<apex:page controller="MyPageCustom" tabStyle="Account"  standardStylesheets="false" showHeader="false">
     <apex:stylesheet value="{!$Resource.styles}"/>
     <h1 class="title">
+        Welcome, {!account.name}!
     </h1>
-    <apex:pageBlock title="All Accounts">
-        <apex:form id="allAccs">
-            <apex:inputField value="{!account.name}" />
 
-            <apex:pageBlockSection>
+    <apex:form id="allAccs"> 
+        <apex:pageBlock>
+        <apex:commandButton value="Get User" action="{!getCurrentUser}" />
+        </apex:pageBlock>
+    </apex:form> 
+    <!-- <apex:pageBlock title="All Accounts"> -->
+        <!-- <apex:form id="allAccs"> -->
+            <!-- <apex:inputField value="{!account.name}" /> -->
+
+            <!-- <apex:pageBlockSection>
                 <apex:dataList var="a" value="{!accounts}" type="1">
                     {!a.name}
                 </apex:dataList>
             </apex:pageBlockSection>
-            <apex:panelGrid columns="2">
-                <apex:commandLink action="{!previous}">Previous</apex:commandLink>
-                <apex:commandLink action="{!next}">Next</apex:commandLink>
-            </apex:panelGrid>
-        </apex:form>
-    </apex:pageBlock>
+            <apex:panelGrid columns="2"> -->
+                <!-- <apex:commandLink action="{!previous}">Previous</apex:commandLink>
+                <apex:commandLink action="{!next}">Next</apex:commandLink> -->
+            <!-- </apex:panelGrid> -->
+        <!-- </apex:form> -->
+    <!-- </apex:pageBlock> -->
 </apex:page>
