@@ -60,8 +60,8 @@ public with sharing class DataLord {
 
             for(Integer i = 0; i < 200; i++){
                 Contact newContact = new Contact();
-                newContact.firstName = 'first ' + i;
-                newContact.lastName = 'last ' + i;
+                newContact.firstName = 'Unique ' + i;
+                newContact.lastName = 'Unique ' + i;
                 contactList.add(newContact); 
             }
             Database.insert(contactList);
@@ -70,6 +70,11 @@ public with sharing class DataLord {
         }
   
     }
+    public static void DeleteSpawnContacts(){
+    List<Contact> deleteAll = [SELECT lastName FROM CONTACT WHERE lastName = 'Unique'];
+        }
+
+
 
     public static void CreateHomes(){
         try {
@@ -94,7 +99,6 @@ public with sharing class DataLord {
         } catch (DMLException e) {
             
         }
-
     }
     
     public static void AssignHomes(){
@@ -113,7 +117,38 @@ public with sharing class DataLord {
             
         }
     }
-    public static void Play(){}
+
+
+    public static void Play(){
+        SavePoint sp = Database.setSavepoint();
+
+        try {
+           SpawnContacts();
+            CreateHomes();
+            Relocate();
+            AssignHomes();
+            DeleteSpawnContacts();
+
+            Integer currentAccountCount = [SELECT COUNT() FROM Account];
+            Integer currentContactCount = [SELECT COUNT() FROM Contact];
+            System.debug('Current Account Count: ' + currentAccountCount);
+            System.debug('Current Contact Count: ' + currentContactCount);
+
+            List<Account> accountsWithContacts = [
+                SELECT Id, Name, (SELECT Id FROM Contacts)
+                FROM Account
+            ];
+            for (Account account : accountsWithContacts) {
+                System.debug('Account Name: ' + account.Name);
+                System.debug('Number of Related Contacts: ' + account.Contacts.size());
+            }
+            
+        } catch (DMLException e) {
+           Database.rollback(sp);
+            // System.debug(Database.INFO);
+            // ApexPages.addMessage(e);
+        }
+    }
 
 
 }

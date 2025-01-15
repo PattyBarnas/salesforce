@@ -25,12 +25,16 @@ System.debug(DataLord.MajorPlayers());
 System.debug(DataLord.MostPopularAccount());
 System.debug(DataLord.GetContactandLeadsNamedTom());
 System.debug(DataLord.GetAccounts());
+System.debug(DataLord.MajorPlayers());
 
 // DML
 DataLord.SpawnContacts();
 // DataLord.spawnContacts();
 DataLord.CreateHomes();
 DataLord.Relocate();
+DataLord.AssignHomes();
+DataLord.deleteSpawnContacts();
+DataLord.Play();
 
 // OOP
 
