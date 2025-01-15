@@ -24,26 +24,18 @@
             <apex:outputText value="Accounts found: {!account.name}" />
         </apex:pageBlock>
     </apex:form> 
-
-    <!-- <apex:form id="allAccs">
+    
+    <apex:form id="relatedCont">
         <apex:pageBlock>
             Get related Contacts: 
-            <apex:inputText value="{!userInput}" />
-            <apex:commandLink action="{!getAccByUserInput}" value="Find Acc" />
+            <apex:commandLink action="{!getRelListOfAcc}" value="Find Acc" />
         </apex:pageBlock>
         <apex:pageBlock>
-            <apex:outputText value="Accounts found: {!account.name}" />
-        </apex:pageBlock>
-    </apex:form>  -->
-
-    <apex:form id="allAccs">
-        <apex:pageBlock>
-            Search for List of Accs: 
-            <apex:inputText value="{!userInput}" />
-            <apex:commandLink action="{!getAccByUserInput}" value="Find Acc" />
-        </apex:pageBlock>
-        <apex:pageBlock>
-            <apex:outputText value="Accounts found: {!account.name}" />
+            <apex:outputText value="Contacts found: "/>
+                <apex:repeat value="{!contact}" var="cont">
+                    {!cont.name}
+                </apex:repeat>
+            
         </apex:pageBlock>
     </apex:form> 
 

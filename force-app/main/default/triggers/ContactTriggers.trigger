@@ -12,7 +12,7 @@ trigger ContactTriggers on Contact (before insert, after update) {
             }  
             when AFTER_UPDATE {
 
-            ContactHelper.updatePhoneFieldOnAcc(Trigger.new);
+            // ContactHelper.updatePhoneFieldOnAcc(Trigger.new);
             
             }
         
