@@ -10,13 +10,8 @@ public with sharing class Calculator {
     public static Integer Multiply(Integer a , Integer b){
         Integer product = 0;
         
-        //  a * b
+      
         for(Integer i = 0; i < b; i++){
-            // (2 , 3)
-            // 0 + 2 = 2
-            // product = 2 + 2 = 4
-            // product 4 + 2 = 6
-            // b determines how many times to add the A variable to the product.
             product = Add(product, a);
         }
         return product;
@@ -24,14 +19,6 @@ public with sharing class Calculator {
 
     // 
 
-        // 10 / 2
-        // true 10 - 2 = 8
-        // true 8 > 2 = 8 - 2 = 6
-        //  6- 2 = 4
-        //  4 - 2 = 2
-        // 2 >= 2 true = 2 -2 = 0
-        //  0 >= 2 = false then returns
-        //  2 / 10 = 1/5
         public static Integer Divide(Integer a, Integer b) {
             Integer result = 0;
             Integer remainder = a;
@@ -61,7 +48,46 @@ public with sharing class Calculator {
             return result;
         }
 
-        // public static Integer Calculate(String a){
-
+        // public static Integer Calculate(String expression){
         // }
-}
+         
+        
+   
+                public static Decimal calculate(String expression) {
+                    expression = expression.replace(' ', '');
+                    
+                  
+                    Pattern pattern = Pattern.compile('(\\d+(\\.\\d+)?)([\\+\\-\\*/])(\\d+(\\.\\d+)?)');
+                    Matcher matcher = pattern.matcher(expression);
+            
+                    if (matcher.matches()) {
+                       
+                        Decimal operand1 = Decimal.valueOf(matcher.group(1)); // Always use Decimal
+                        String operator = matcher.group(3);
+                        Decimal operand2 = Decimal.valueOf(matcher.group(4));
+                        
+                        switch on operator {
+                            when '+' {
+                                return operand1 + operand2;
+                            }
+                            when '-' {
+                                return operand1 - operand2;
+                            }
+                            when '*' {
+                                return operand1 * operand2;
+                            }
+                            when '/' {
+                                if (operand2 == 0) {
+                                    throw new IllegalArgumentException('Division by zero is not allowed.');
+                                }
+                                return operand1 / operand2;
+                            }
+                            when else {
+                                throw new IllegalArgumentException('Unsupported operator: ' + operator);
+                            }
+                        }
+                    } else {
+                        throw new IllegalArgumentException('Invalid mathematical expression: ' + expression);
+                    }
+                }
+            }
