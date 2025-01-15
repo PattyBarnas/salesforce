@@ -4,11 +4,50 @@
         Welcome, {!account.name}!
     </h1>
 
-    <apex:form id="allAccs"> 
+    <!-- <apex:form id="allAccs"> 
         <apex:pageBlock>
         <apex:commandButton value="Get User" action="{!getCurrentUser}" />
         </apex:pageBlock>
+        <apex:pageBlock>
+            <apex:inputField value="{!account.name}" />
+            <apex:commandLink action="{!getAccByUserInput}">Find Acc</apex:commandLink>
+        </apex:pageBlock>
     </apex:form> 
+    <apex:form id="allAccs">  -->
+    <apex:form id="allAccs">
+        <apex:pageBlock>
+            Search for an account: 
+            <apex:inputText value="{!userInput}" />
+            <apex:commandLink action="{!getAccByUserInput}" value="Find Acc" />
+        </apex:pageBlock>
+        <apex:pageBlock>
+            <apex:outputText value="Accounts found: {!account.name}" />
+        </apex:pageBlock>
+    </apex:form> 
+
+    <!-- <apex:form id="allAccs">
+        <apex:pageBlock>
+            Get related Contacts: 
+            <apex:inputText value="{!userInput}" />
+            <apex:commandLink action="{!getAccByUserInput}" value="Find Acc" />
+        </apex:pageBlock>
+        <apex:pageBlock>
+            <apex:outputText value="Accounts found: {!account.name}" />
+        </apex:pageBlock>
+    </apex:form>  -->
+
+    <apex:form id="allAccs">
+        <apex:pageBlock>
+            Search for List of Accs: 
+            <apex:inputText value="{!userInput}" />
+            <apex:commandLink action="{!getAccByUserInput}" value="Find Acc" />
+        </apex:pageBlock>
+        <apex:pageBlock>
+            <apex:outputText value="Accounts found: {!account.name}" />
+        </apex:pageBlock>
+    </apex:form> 
+
+
     <!-- <apex:pageBlock title="All Accounts"> -->
         <!-- <apex:form id="allAccs"> -->
             <!-- <apex:inputField value="{!account.name}" /> -->

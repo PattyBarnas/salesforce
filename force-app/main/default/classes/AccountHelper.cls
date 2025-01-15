@@ -33,18 +33,15 @@ public with sharing class AccountHelper {
 
     @AuraEnabled
     public static void insertNewRelatedContact(List<Account> newAcc){
-        try {         
-            List<Contact> contList = new List<Contact>();
-
-            for(Account acc : newAcc){
-                Contact cont = new Contact(LastName = 'Testing ' + acc.Name, AccountId = acc.Id );
-                contList.add(cont);
-            }
-            
-            // if(!contList.isEmpty()){
-                insert contList;
-            // }
-        
+        try {        
+            for (Account acc : newAcc) {
+                Contact newContact = new Contact(
+                    FirstName = acc.Name,  
+                    LastName = 'Related', 
+                    AccountId = acc.Id      
+                );
+                insert newContact;
+            } 
         } catch (DMLException e) {
             
         }
