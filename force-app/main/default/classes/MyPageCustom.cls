@@ -50,4 +50,12 @@ public with sharing class MyPageCustom {
         }
     }
 
+    public void saveAccounts(){
+        if(accounts != null){
+            update account;
+        } else{
+            insert account;
+        }
+    }
+
 }

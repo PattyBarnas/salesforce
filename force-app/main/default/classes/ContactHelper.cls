@@ -45,34 +45,25 @@ public class ContactHelper {
         }
     }
 
-    public static void updatePhoneFieldOnAcc(List<Contact> contList) { 
-        Set<Id> accIds = new Set<Id>();
-    
-        
-        for(Contact c: contList){
-            accIds.add(c.AccountId);
+    public static void updatePhoneFieldOnAcc(List<Contact> contacts){
+        Set<Id> accountIds = new Set<Id>();
+        for(Contact contact : contacts){
+            if(contact.AccountId != null){
+                accountIds.add(contact.AccountId);
+            }
         }
-    
-        if (!accIds.isEmpty()) {
-         
-            Map<Id, Account> accountMap = new Map<Id, Account>([SELECT Id, Phone FROM Account WHERE Id IN :accIds]);
-    
-          
-            List<Contact> contactsToUpdate = new List<Contact>();
-    
-            for(Contact c : contList) {
-                if (accountMap.containsKey(c.AccountId)) {
-                    accountMap.get(c.AccountId).Phone = c.Phone;
-                    contactsToUpdate.add(c);
+        List<Account> accounts = [SELECT Phone FROM Account WHERE ID IN :accountIds];
+ 
+        for(Account account : accounts){
+            for(Contact contact : contacts){
+                if(contact.AccountId == account.Id){
+                    account.Phone = contact.Phone;
                 }
             }
-    
-            if (!contactsToUpdate.isEmpty()) {
-                update contactsToUpdate;
-            }
         }
+        update accounts;
     }
-    
+ 
 
 
 }

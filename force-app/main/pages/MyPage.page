@@ -46,19 +46,25 @@
                 <apex:inputText value="{!userInput}" >
                     <apex:actionSupport event="onkeyup" action="{!getAccsByKeystrokes}" rerender="results" />
                 </apex:inputText>
-                <apex:commandLink action="{!getAccByUserInput}" value="Find Acc" />
+                <!-- <apex:commandLink action="{!getAccByUserInput}" value="Find Acc" /> -->
             </apex:pageBlockSection>
         </apex:pageBlock>
     </apex:form> 
 
 
-
-    <apex:pageBlock id="results">
-        <h3>Matching Accounts:</h3>
-        <apex:repeat value="{!accounts}" var="acc">
-            <p>{!acc.Name}</p>
-        </apex:repeat>
-    </apex:pageBlock>
+    <apex:form id="inlineEdit">
+        <apex:pageBlock id="results">
+            <h3>Matching Accounts:</h3>
+            <apex:pageBlockTable value="{!accounts}" var="acc">
+                <apex:column headerValue="Account Name">
+                    <apex:inputField value="{!acc.Name}" />   
+                        <apex:actionSupport event="onchange" /> 
+                        <p>{!acc.Name}</p>
+                    </apex:column>
+            </apex:pageBlockTable>
+            <apex:commandButton value="Save" action="{!saveAccounts}"/>
+        </apex:pageBlock>
+    </apex:form>
     
 
     <!-- <apex:pageBlock title="All Accounts"> -->
