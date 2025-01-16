@@ -50,6 +50,20 @@ public with sharing class MyPageCustom {
         }
     }
 
+
+    public void getAllAccsAndRelCont(){
+        // accounts = [SELECT NAME FROM ACCOUNT];
+        accounts = [SELECT NAME, (SELECT Contact.Name FROM Contacts) FROM ACCOUNT];
+    }
+
+
+
+
+
+
+
+
+
     public void saveAccounts(){
         if(accounts != null){
             update account;
@@ -57,5 +71,6 @@ public with sharing class MyPageCustom {
             insert account;
         }
     }
+
 
 }

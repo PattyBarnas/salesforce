@@ -13,8 +13,9 @@
             <apex:commandLink action="{!getAccByUserInput}">Find Acc</apex:commandLink>
         </apex:pageBlock>
     </apex:form> 
+
     <apex:form id="allAccs">  -->
-    <apex:form id="allAccs">
+    <!-- <apex:form id="allAccs">
         <apex:pageBlock>
             Search for an account: 
             <apex:inputText value="{!userInput}" />
@@ -24,9 +25,9 @@
         <apex:pageBlock>
             <apex:outputText value="Accounts found: {!account.name}" />
         </apex:pageBlock>
-    </apex:form> 
+    </apex:form>  -->
     
-    <apex:form id="relatedCont">
+    <!-- <apex:form id="relatedCont">
         <apex:pageBlock>
             Get related Contacts: 
             <apex:commandLink action="{!getRelListOfAcc}" value="Find Acc" />
@@ -37,22 +38,22 @@
                     {!cont.name}
                 </apex:repeat>
         </apex:pageBlock>
-    </apex:form> 
+    </apex:form>  -->
 
     <!-- ///////////////////////////////////////////////////// -->
-    <apex:form id="form">
+    <!-- <apex:form id="form">
         <apex:pageBlock>
             <apex:pageBlockSection title="Search for an account list: ">
                 <apex:inputText value="{!userInput}" >
                     <apex:actionSupport event="onkeyup" action="{!getAccsByKeystrokes}" rerender="results" />
                 </apex:inputText>
-                <!-- <apex:commandLink action="{!getAccByUserInput}" value="Find Acc" /> -->
+              //  <apex:commandLink action="{!getAccByUserInput}" value="Find Acc" />
             </apex:pageBlockSection>
         </apex:pageBlock>
-    </apex:form> 
+    </apex:form>  -->
 
 
-    <apex:form id="inlineEdit">
+    <!-- <apex:form id="inlineEdit">
         <apex:pageBlock id="results">
             <h3>Matching Accounts:</h3>
             <apex:pageBlockTable value="{!accounts}" var="acc">
@@ -64,8 +65,30 @@
             </apex:pageBlockTable>
             <apex:commandButton value="Save" action="{!saveAccounts}"/>
         </apex:pageBlock>
-    </apex:form>
+    </apex:form> -->
+
+    <!-- /////////////////////////////////// VIII -->
+        <apex:form id="relatedAccsAndCont">
+            <apex:pageBlock>
+                <apex:outputText value="Get All Accounts and Related Contacts: " />
+                <apex:commandLink action="{!getAllAccsAndRelCont}" value="Get All" />
+            </apex:pageBlock>
     
+            <apex:pageBlock title="Accounts and Related Contacts">
+                <apex:outputText value="Accounts and Contacts found: " />
+                <apex:repeat value="{!accounts}" var="acc">
+                        <div>
+                            <b>Account:</b> {!acc.Name},
+                            <b>Contacts:</b> 
+                            <apex:repeat value="{!acc.Contacts}" var="cont">
+                                {!cont.Name}<apex:outputText value=", " />
+                            </apex:repeat>
+                        </div>
+                    <hr />
+                </apex:repeat>
+            </apex:pageBlock>
+        </apex:form>
+      
 
     <!-- <apex:pageBlock title="All Accounts"> -->
         <!-- <apex:form id="allAccs"> -->

@@ -3,3 +3,7 @@
     background-color: red;
     color: green;
 }
+
+.flex{
+    display: flex;
+}
