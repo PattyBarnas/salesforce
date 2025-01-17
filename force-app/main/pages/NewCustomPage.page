@@ -1,0 +1,10 @@
+<apex:page renderAs="pdf" language="!$User.Language" controller="MyPageCustom">
+        <apex:outputText>
+          <h4>About me:</h4>
+          <!-- <p>
+            I love to code.. Salesforce is quiet an interesting cloud technology. I like to go hiking 
+          </p> -->
+          <p>{!IF(Label.StaticParagraph_SpanishTranslation, Label.StaticParagraph_DefaultContent)}</p>
+
+      </apex:outputText>
+</apex:page>

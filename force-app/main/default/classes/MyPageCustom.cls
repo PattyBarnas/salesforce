@@ -1,18 +1,22 @@
 public with sharing class MyPageCustom {
 
     
-    public Account account {get;set;}
-    public List<Contact> contact {get; set;}
-    public List<Account> accounts {get; set;}
+    public transient Account account {get;set;}
+    public transient List<Contact> contact {get; set;}
+    public transient List<Account> accounts {get; set;}
     private Id id;
     public String userInput {get; set;}
+    public String aboutMeTitle { get; set; }
 
+
+    PageReference pageRef = new PageReference('partialURL');
 
        public MyPageCustom(){
         // account = [SELECT NAME, ID FROM ACCOUNT WHERE NAME = 'HAHA' LIMIT 1];
         id = ApexPages.currentPage().getParameters().get('id');
         userInput = '';
         contact = new List<Contact>();
+        aboutMeTitle = '';
     
        }
 
@@ -31,9 +35,9 @@ public with sharing class MyPageCustom {
             } else {
                 account = null;
                 id = null;
+             }
             }
         }
-    }
        
 
     public void getRelListOfAcc(){
@@ -52,24 +56,31 @@ public with sharing class MyPageCustom {
 
 
     public void getAllAccsAndRelCont(){
-        // accounts = [SELECT NAME FROM ACCOUNT];
-        accounts = [SELECT NAME, (SELECT Contact.Name FROM Contacts) FROM ACCOUNT];
+        accounts = [SELECT NAME, (SELECT Contact.Name, Contact.Email FROM Contacts) FROM ACCOUNT];
+    }
+
+    public void getAllAccsAndRelContFilter(){
+        accounts = [SELECT NAME, (SELECT Contact.Name FROM Contacts) FROM ACCOUNT WHERE NAME LIKE :('%' + userInput + '%')];
     }
 
 
 
-
-
-
-
-
+    public PageReference downloadAboutMePDF(){
+        PageReference pdfPage = Page.NewCustomPage;
+        pdfPage.setRedirect(true);
+        return pdfPage;
+    }
 
     public void saveAccounts(){
         if(accounts != null){
             update account;
         } else{
-            insert account;
+            Account newAcc = new Account();
+            insert newAcc;
         }
+    }
+    public translateToSpanish() {
+        aboutMeTitle = Label.About_Me_Title; // Dynamically fetches translation if user language is Spanish
     }
 
 
